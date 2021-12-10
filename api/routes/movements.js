@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Movement = require('../models/Movement');
+const jwtauth = require('../middleware/jwtauth');
 
 // @route GET /api/movements
-router.get('/', async (req, res) => {
+router.get('/', jwtauth, async (req, res) => {
   const movements = await Movement.find();
 
   res.status(200).send({

@@ -2,9 +2,10 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 const Technique = require('../models/Technique');
+const jwtauth = require('../middleware/jwtauth');
 
 // @route GET /api/techniques
-router.get('/', async (req, res) => {
+router.get('/', jwtauth, async (req, res) => {
   let techniques = [];
   let query = new RegExp(req.query.q);
 
@@ -22,7 +23,7 @@ router.get('/', async (req, res) => {
 });
 
 // @route GET /api/techniques/:id
-router.get('/:id', async (req, res) => {
+router.get('/:id', jwtauth, async (req, res) => {
   const id = req.params.id;
   const idObject = mongoose.Types.ObjectId(id);
 
