@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import Tile from './tile';
+import axios from 'axios';
 
 export default class search extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      posts: this.props.posts,
+      posts: [],
       techniqueId: this.props.techniqueId,
-      postsSearch: []
+      postsSearch: [],
+      noResults: false
     }
   }
   
@@ -34,13 +36,33 @@ export default class search extends Component {
     }
   };
 
+  dbQuery = async (query) => {
+    console.log('search fired!')
+    this.setState(() => ({ noResults: false }))
+    try {
+      const techniques = await axios.get(`http://localhost:5000/api/techniques?q=${query}`);
+
+      // console.log('techniques', techniques.data.data);
+      
+      if (techniques.data.data.length === 0) {
+        return this.setState(() => ({ noResults: true }));
+      } else {
+        return this.setState({
+          postsSearch: techniques.data.data
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   passTechId = (id) => {
     this.props.techId(id);
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.filterPosts(this.state.posts, e.target[0].value);
+    this.dbQuery(e.target[0].value);
   };
 
   render() {
@@ -51,7 +73,7 @@ export default class search extends Component {
       queryResults = "There are no results for your search."
     } else {
       queryResults = this.state.postsSearch.map(post => {
-        return <Tile key={post.id} id={post.id} name={post.name} techniqueId={this.props.techniqueId} setTechnique={this.passTechId} />
+        return <Tile key={post._id} id={post._id} name={post.name.romanji} techniqueId={this.props.techniqueId} setTechnique={this.passTechId} />
       })
     }
 

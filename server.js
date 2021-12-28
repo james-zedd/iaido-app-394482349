@@ -1,8 +1,13 @@
 const express = require('express');
+const res = require('express/lib/response');
 const app = express();
 const dotenv = require('dotenv').config();
+const cors = require('cors');
 
 const mongoConnection = require('./api/config/db');
+
+// CORS
+app.use(cors());
 
 // Middleware: Body Parser
 app.use(express.json());

@@ -4,6 +4,8 @@ const Movement = require('../models/Movement');
 const jwtauth = require('../middleware/jwtauth');
 
 // @route GET /api/movements
+// Get all movements
+// protected == true
 router.get('/', jwtauth, async (req, res) => {
   const movements = await Movement.find();
 

@@ -5,7 +5,9 @@ const Technique = require('../models/Technique');
 const jwtauth = require('../middleware/jwtauth');
 
 // @route GET /api/techniques
-router.get('/', jwtauth, async (req, res) => {
+// Get all techniques
+// protected == true | DISABLED
+router.get('/', async (req, res) => {
   let techniques = [];
   let query = new RegExp(req.query.q);
 
@@ -23,7 +25,9 @@ router.get('/', jwtauth, async (req, res) => {
 });
 
 // @route GET /api/techniques/:id
-router.get('/:id', jwtauth, async (req, res) => {
+// Get a single technique by id
+// protected == true | DISABLED
+router.get('/:id', async (req, res) => {
   const id = req.params.id;
   const idObject = mongoose.Types.ObjectId(id);
 
@@ -41,8 +45,5 @@ router.get('/:id', jwtauth, async (req, res) => {
     data: technique
   });
 });
-
-// @route GET /api/techniques?:query
-
 
 module.exports = router;

@@ -8,6 +8,8 @@ const User = require('../models/User');
 const { JsonWebTokenError } = require('jsonwebtoken');
 
 // @route POST /api/users
+// Add a user
+// protected == false
 router.post('/', 
   [
     check('name', 'Please add a name').not().isEmpty(),

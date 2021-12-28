@@ -9,6 +9,7 @@ const User = require('../models/User');
 
 // @route GET /api/auth
 // Get logged in user
+// protected == true
 router.get('/', jwtauth, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
@@ -32,6 +33,7 @@ router.get('/', jwtauth, async (req, res) => {
 
 // @route POST /api/auth
 // Log in user
+// protected == false
 router.post(
   '/', 
   [
@@ -89,7 +91,7 @@ router.post(
 
 // @route /api/auth/logout
 // Log out user
-
+// protected == false
 router.post('/logout', (req, res) => {
   res.send('Log out the user');
 })
