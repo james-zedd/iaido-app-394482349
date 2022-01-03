@@ -6,6 +6,9 @@ const cors = require('cors');
 
 const mongoConnection = require('./api/config/db');
 
+// public access
+app.use(express.static('public'));
+
 // CORS
 app.use(cors());
 
@@ -15,9 +18,9 @@ app.use(express.json());
 // Initiate DB via Mongoose
 mongoConnection();
 
-app.get('/', (req, res, next) => {
-  res.send('Hello from home page');
-});
+// app.get('/', (req, res, next) => {
+//   res.send('Hello from home page');
+// });
 
 // Define Routes
 app.use('/api/techniques', require('./api/routes/techniques'));
