@@ -43,7 +43,7 @@ export default class main extends Component {
 
   findTechnique = async (id) => {
     try {
-      const findTech = await axios.get(`http://localhost:5000/api/techniques/${id}`);
+      const findTech = await axios.get(`/api/techniques/${id}`);
       // console.log('found technique', findTech.data.data[0]);
 
       return this.setState(() => ({ 

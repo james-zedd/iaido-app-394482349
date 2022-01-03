@@ -40,7 +40,7 @@ export default class search extends Component {
     console.log('search fired!')
     this.setState(() => ({ noResults: false }))
     try {
-      const techniques = await axios.get(`http://localhost:5000/api/techniques?q=${query}`);
+      const techniques = await axios.get(`/api/techniques?q=${query}`);
 
       // console.log('techniques', techniques.data.data);
       
