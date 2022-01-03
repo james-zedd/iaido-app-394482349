@@ -18,14 +18,14 @@ app.use(express.json());
 // Initiate DB via Mongoose
 mongoConnection();
 
-// app.get('/', (req, res, next) => {
-//   res.send('Hello from home page');
-// });
-
 // Define Routes
 app.use('/api/techniques', require('./api/routes/techniques'));
 app.use('/api/movements', require('./api/routes/movements'));
 app.use('/api/users', require('./api/routes/users'));
 app.use('/api/auth', require('./api/routes/auth'));
+
+app.get('/', (req, res, next) => {
+  res.sendFile(path.join(__dirname + '/public/index.html'));
+});
 
 app.listen(5000, () => console.log('app started on port 5000'));
