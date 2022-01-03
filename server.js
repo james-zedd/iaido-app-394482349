@@ -28,4 +28,6 @@ app.get('/', (req, res, next) => {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
 
-app.listen(5000, () => console.log('app started on port 5000'));
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log('app started on port 5000'));
