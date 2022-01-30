@@ -6,8 +6,8 @@ const jwtauth = require('../middleware/jwtauth');
 
 // @route GET /api/techniques
 // Get all techniques
-// protected == true | DISABLED
-router.get('/', async (req, res) => {
+// protected == true
+router.get('/', jwtauth, async (req, res) => {
   let techniques = [];
   let query = new RegExp(req.query.q);
 
@@ -26,8 +26,8 @@ router.get('/', async (req, res) => {
 
 // @route GET /api/techniques/:id
 // Get a single technique by id
-// protected == true | DISABLED
-router.get('/:id', async (req, res) => {
+// protected == true
+router.get('/:id', jwtauth, async (req, res) => {
   const id = req.params.id;
   const idObject = mongoose.Types.ObjectId(id);
 

@@ -2,10 +2,16 @@ import React, { Component } from 'react'
 
 export default class login extends Component {
   render() {
+    
+    let errorMessage = this.props.errorMessage;
+
     return (
       <div>
         <h4>Login</h4>
-        <form method="POST" action="" className="form">
+        {errorMessage !== '' &&
+          <div className="error-message">{errorMessage}</div>
+        }
+        <form onSubmit={this.props.authenticate} className="form">
           <div className="form__input-container">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" name="email" />

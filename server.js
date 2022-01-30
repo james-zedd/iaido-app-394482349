@@ -3,17 +3,27 @@ const res = require('express/lib/response');
 const app = express();
 const dotenv = require('dotenv').config();
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 
 const mongoConnection = require('./api/config/db');
 
 // public access
 app.use(express.static('public'));
 
-// CORS
-app.use(cors());
+// Middleware: CORS
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://iaido-app.herokuapp.com'],
+  optionSuccessStatus: 200,
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'httponly', 'Authorization']
+}
+app.use(cors(corsOptions));
 
 // Middleware: Body Parser
 app.use(express.json());
+
+// Middleware: Cookie Parser
+app.use(cookieParser());
 
 // Initiate DB via Mongoose
 mongoConnection();
