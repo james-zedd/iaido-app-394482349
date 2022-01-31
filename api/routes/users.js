@@ -59,7 +59,7 @@ const User = require('../models/User');
 //             throw err;
 //           }
 //           res.status(200).cookie('iaiAppAuth', token, {
-//             secure: false,
+//             secure: process.env.NODE_ENV === 'production',
 //             httpOnly: true,
 //           }).json({
 //             status: 200,

@@ -40,7 +40,7 @@ export default class main extends Component {
   authenticateUser = async (e) => {
     e.preventDefault();
     this.setState(() => ({
-      errorMessage:''
+      errorMessage: ''
     }));
 
     let { email, password } = document.forms[0];

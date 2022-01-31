@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
 
 module.exports = function(req, res, next) {
-
   let token = req.cookies.iaiAppAuth || req.header('Authorization');
 
   if (!token) {
