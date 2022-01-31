@@ -75,10 +75,13 @@ router.post(
           if (err) {
             throw err;
           }
-          res.status(200).json({
+          res.status(200).cookie('iaiAppAuth', token, {
+            secure: process.env.NODE_ENV === 'production',
+            httpOnly: true,
+          }).json({
             status: 200,
-            user: user,
-            token: token
+            // user: user,
+            // token: token
           });
         }
       );
@@ -91,9 +94,14 @@ router.post(
 
 // @route /api/auth/logout
 // Log out user
-// protected == false
-router.post('/logout', (req, res) => {
-  res.send('Log out the user');
+// protected == true
+router.get('/logout', jwtauth, (req, res) => {
+  res
+    .clearCookie('iaiAppAuth')
+    .status(200)
+    .json({
+      message: 'Successful user log out.'
+    });
 })
 
 module.exports = router;
