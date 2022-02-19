@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Gatekeeper from './gatekeeper'
+import Login from './login'
 import Search from './search'
 import Details from './details'
 import axios from 'axios';
@@ -33,12 +33,30 @@ export default class main extends Component {
       techniqueId: null,
       technique: [],
       isOmoteUra: false,
+      errorMessage: '',
     };
-    this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick = () => {
-    this.setState(() => ({ authenticated: !this.state.authenticated, techniqueId: null }));
+  authenticateUser = async (e) => {
+    e.preventDefault();
+    this.setState(() => ({
+      errorMessage: ''
+    }));
+
+    let { email, password } = document.forms[0];
+
+    try {
+      await axios.post('/api/auth', {email: email.value, password: password.value} , {headers: {'Content-Type': 'application/json'}});
+
+      return this.setState(() => ({
+        authenticated: true
+      }));
+    } catch (err) {
+      // console.log(err.response);
+      return this.setState(() => ({
+        errorMessage: err.response.data.message || err.response.data.errors[0].msg
+      }))
+    }
   }
 
   findTechnique = async (id) => {
@@ -58,6 +76,14 @@ export default class main extends Component {
     }
   }
 
+  logout = async () => {
+    await axios.get('/api/auth/logout');
+
+    return this.setState(() => ({
+      authenticated: false
+    }));
+  }
+
   setTechniqueId = (id) => {
     this.setState(() => ({ techniqueId: id }));
   }
@@ -75,17 +101,20 @@ export default class main extends Component {
     } else if (auth) {
       return <Search techniqueId={this.state.techniqueId} techId={this.findTechnique} />
     } else {
-      return <Gatekeeper />
+      return <Login authenticate={this.authenticateUser} errorMessage={this.state.errorMessage} />
     }
   }
 
   render() {
 
     let RenderPage = this.RenderPage;
+    let authenticated = this.state.authenticated;
 
     return (
       <div>
-        <button type="button" onClick={this.handleClick}>Authenticate</button>
+        {authenticated &&
+          <button type="button" onClick={this.logout}>Logout</button>
+        }
         <RenderPage />
       </div>
     )
