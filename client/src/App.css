@@ -1,18 +1,22 @@
 :root {
-  --metallic-seaweed: #087f8c;
-  --eerie-black: #212121;
-  --green-sheen: #77bba9;
-  --eggshell: #f1e9da;
-  --lava: #d11026;
+    --metallic-seaweed: #087f8c;
+    --eerie-black: #212121;
+    --green-sheen: #77bba9;
+    --eggshell: #f1e9da;
+    --lava: #d11026;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto+Condensed&display=swap');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-  margin: 0;
-  font-family: 'Roboto Condensed', sans-serif;
-  background-color: var(--eggshell);
-  color: var(--eerie-black);
+    margin: 0;
+    font-family: 'Roboto Condensed', sans-serif;
+    background-color: var(--eggshell);
+    color: var(--eerie-black);
 }
 
 h1,
@@ -21,44 +25,27 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Lato', sans-serif;
+    font-family: 'Lato', sans-serif;
 }
 
 header {
-  display: block;
-  width: 100%;
-  height: 30px;
-  background-color: var(--lava);
+    display: block;
+    width: 100%;
+    height: 30px;
+    background-color: var(--lava);
 }
 
 main {
-  margin: 0 24px;
-}
-
-button {
-  margin-bottom: 12px;
-}
-
-button.button__toggle {
-  margin-top: 18px;
-}
-
-.tile {
-  border: 1px solid var(--metallic-seaweed);
-  padding: 12px;
-  margin-bottom: 12px;
-}
-
-.tile p {
-  margin: 6px 0;
+    padding: 24px;
+    min-height: calc(100vh - 30px - 144px);
 }
 
 footer {
-  background-color: var(--eerie-black);
-  padding: 60px 0;
-  text-align: center;
+    background-color: var(--eerie-black);
+    padding: 60px 0;
+    text-align: center;
 }
 
 footer p {
-  color: var(--eggshell);
+    color: var(--eggshell);
 }

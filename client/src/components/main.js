@@ -111,12 +111,12 @@ export default class main extends Component {
     let authenticated = this.state.authenticated;
 
     return (
-      <div>
+      <>
         {authenticated &&
-          <button type="button" onClick={this.logout}>Logout</button>
+          <button type="button" className='bg-red-500 hover:bg-red-700 hover:cursor-pointer px-4 py-2 rounded-lg text-white' onClick={this.logout}>Logout</button>
         }
         <RenderPage />
-      </div>
+      </>
     )
   }
 }
