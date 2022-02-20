@@ -6,7 +6,6 @@ const App = () => {
     <div className="App">
       <header></header>
       <main>
-        <h2>Iaido App</h2>
         <Main />
       </main>
       <footer>

@@ -80,12 +80,16 @@ export default class search extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="search">Search</label>
-          <input type="text" id="search" placeholder="Enter a iaido technique" name="search" />
-          <button type="submit">Search</button>
+          <div className="form__input-container mt-3">
+            <label htmlFor="search" className='text-slate-900 text-2xl font-bold'>Search</label>
+            <div className="mt-2">
+              <input type="text" id="search" placeholder="Enter a iaido technique" name="search" className='border border-gray-300 px-4 py-2 rounded-l-lg shadow-sm focus:outline-none focus:border-indigo-100' />
+              <button type="submit" className='border border-gray-300 bg-red-500 hover:bg-red-700 hover:cursor-pointer px-4 py-2 rounded-r-lg text-white'>Search</button>
+            </div>
+          </div>
         </form>
-        <p>Type the name of a technique above to begin. Hit search to list all techniques.</p>
-        <div className="search__results">
+        <p className='mt-4'>Type the name of a technique above to begin. Hit search to list all techniques.</p>
+        <div className="search__results py-4 block lg:flex lg:flex-wrap">
           {queryResults}
         </div>
       </div>

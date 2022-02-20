@@ -7,10 +7,12 @@ export default class tile extends Component {
     let { id, name } = this.props;
 
     return (
-      <div className="tile">
-        <p>ID: {id}</p>
-        <p>{name}</p>
-        <button type="button" onClick={() => this.props.setTechnique(id)}>View</button>
+      <div className='w-full lg:w-2/4 lg:px-2'>
+        <div className="tile w-full mb-6 p-4 border border-slate-500 rounded-lg bg-neutral-50 shadow-lg">
+          <p className='mb-2'>ID: {id}</p>
+          <p className='mb-4'>Name: {name}</p>
+          <button type="button" className='bg-red-500 hover:bg-red-700 hover:cursor-pointer px-4 py-2 rounded-lg text-white' onClick={() => this.props.setTechnique(id)}>View</button>
+        </div>
       </div>
     )
   }
